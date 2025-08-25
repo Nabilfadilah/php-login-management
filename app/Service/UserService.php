@@ -8,12 +8,9 @@ use Nabil\MVC\Repository\UserRepository;
 use Nabil\MVC\Exception\ValidationException;
 use Nabil\MVC\Domain\User;
 use Nabil\MVC\config\Database;
+use Nabil\MVC\Model\UserLoginRequest;
+use Nabil\MVC\Model\UserLoginResponse;
 
-// use ProgrammerZamanNow\Belajar\PHP\MVC\Config\Database;
-// use ProgrammerZamanNow\Belajar\PHP\MVC\Domain\User;
-// use ProgrammerZamanNow\Belajar\PHP\MVC\Exception\ValidationException;
-use ProgrammerZamanNow\Belajar\PHP\MVC\Model\UserLoginRequest;
-use ProgrammerZamanNow\Belajar\PHP\MVC\Model\UserLoginResponse;
 use ProgrammerZamanNow\Belajar\PHP\MVC\Model\UserPasswordUpdateRequest;
 use ProgrammerZamanNow\Belajar\PHP\MVC\Model\UserPasswordUpdateResponse;
 use ProgrammerZamanNow\Belajar\PHP\MVC\Model\UserProfileUpdateRequest;
@@ -77,33 +74,34 @@ class UserService
         }
     }
 
-    // public function login(UserLoginRequest $request): UserLoginResponse
-    // {
-    //     $this->validateUserLoginRequest($request);
+    // function login
+    public function login(UserLoginRequest $request): UserLoginResponse
+    {
+        $this->validateUserLoginRequest($request);
 
-    //     $user = $this->userRepository->findById($request->id);
-    //     if ($user == null) {
-    //         throw new ValidationException("Id or password is wrong");
-    //     }
+        $user = $this->userRepository->findById($request->id);
+        if ($user == null) {
+            throw new ValidationException("Id or password is wrong");
+        }
 
-    //     if (password_verify($request->password, $user->password)) {
-    //         $response = new UserLoginResponse();
-    //         $response->user = $user;
-    //         return $response;
-    //     } else {
-    //         throw new ValidationException("Id or password is wrong");
-    //     }
-    // }
+        if (password_verify($request->password, $user->password)) {
+            $response = new UserLoginResponse();
+            $response->user = $user;
+            return $response;
+        } else {
+            throw new ValidationException("Id or password is wrong");
+        }
+    }
 
-    // private function validateUserLoginRequest(UserLoginRequest $request)
-    // {
-    //     if (
-    //         $request->id == null || $request->password == null ||
-    //         trim($request->id) == "" || trim($request->password) == ""
-    //     ) {
-    //         throw new ValidationException("Id, Password can not blank");
-    //     }
-    // }
+    private function validateUserLoginRequest(UserLoginRequest $request)
+    {
+        if (
+            $request->id == null || $request->password == null ||
+            trim($request->id) == "" || trim($request->password) == ""
+        ) {
+            throw new ValidationException("Id, Password can not blank");
+        }
+    }
 
     // public function updateProfile(UserProfileUpdateRequest $request): UserProfileUpdateResponse
     // {
