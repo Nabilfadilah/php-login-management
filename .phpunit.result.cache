@@ -1,1 +1,1 @@
-{"version":1,"defects":[],"times":{"Nabil\\MVC\\Config\\DatabaseTest::testGetConnection":0.043,"Nabil\\MVC\\Config\\DatabaseTest::testGetConnectionSingleton":0.001,"ProgrammerZamanNow\\Belajar\\PHP\\MVC\\RegexTest::testRegex":0.001}}
+{"version":1,"defects":[],"times":{"Nabil\\MVC\\Config\\DatabaseTest::testGetConnection":0.025,"Nabil\\MVC\\Config\\DatabaseTest::testGetConnectionSingleton":0.002,"ProgrammerZamanNow\\Belajar\\PHP\\MVC\\RegexTest::testRegex":0.001,"Nabil\\MVC\\app\\ViewTest::testRender":0.021}}
