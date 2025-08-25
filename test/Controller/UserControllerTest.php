@@ -187,78 +187,81 @@ namespace Nabil\MVC\controller {
             $this->expectOutputRegex("[X-PZN-SESSION: ]");
         }
 
-        // public function testUpdateProfile()
-        // {
-        //     $user = new User();
-        //     $user->id = "eko";
-        //     $user->name = "Eko";
-        //     $user->password = password_hash("rahasia", PASSWORD_BCRYPT);
-        //     $this->userRepository->save($user);
+        public function testUpdateProfile()
+        {
+            $user = new User();
+            $user->id = "eko";
+            $user->name = "Eldoo";
+            $user->password = password_hash("rahasia", PASSWORD_BCRYPT);
+            $this->userRepository->save($user);
 
-        //     $session = new Session();
-        //     $session->id = uniqid();
-        //     $session->userId = $user->id;
-        //     $this->sessionRepository->save($session);
+            $session = new Session();
+            $session->id = uniqid();
+            $session->userId = $user->id;
+            $this->sessionRepository->save($session);
 
-        //     $_COOKIE[SessionService::$COOKIE_NAME] = $session->id;
+            $_COOKIE[SessionService::$COOKIE_NAME] = $session->id;
 
-        //     $this->userController->updateProfile();
+            $this->userController->updateProfile();
 
-        //     $this->expectOutputRegex("[Profile]");
-        //     $this->expectOutputRegex("[Id]");
-        //     $this->expectOutputRegex("[eko]");
-        //     $this->expectOutputRegex("[Name]");
-        //     $this->expectOutputRegex("[Eko]");
-        // }
+            // outputnya
+            $this->expectOutputRegex("[Profile]");
+            $this->expectOutputRegex("[Id]");
+            $this->expectOutputRegex("[eko]");
+            $this->expectOutputRegex("[Name]");
+            $this->expectOutputRegex("[Eldoo]");
+        }
 
-        // public function testPostUpdateProfileSuccess()
-        // {
-        //     $user = new User();
-        //     $user->id = "eko";
-        //     $user->name = "Eko";
-        //     $user->password = password_hash("rahasia", PASSWORD_BCRYPT);
-        //     $this->userRepository->save($user);
+        public function testPostUpdateProfileSuccess()
+        {
+            $user = new User();
+            $user->id = "eko";
+            $user->name = "Eldoo";
+            $user->password = password_hash("rahasia", PASSWORD_BCRYPT);
+            $this->userRepository->save($user);
 
-        //     $session = new Session();
-        //     $session->id = uniqid();
-        //     $session->userId = $user->id;
-        //     $this->sessionRepository->save($session);
+            $session = new Session();
+            $session->id = uniqid();
+            $session->userId = $user->id;
+            $this->sessionRepository->save($session);
 
-        //     $_COOKIE[SessionService::$COOKIE_NAME] = $session->id;
+            $_COOKIE[SessionService::$COOKIE_NAME] = $session->id;
 
-        //     $_POST['name'] = 'Budi';
-        //     $this->userController->postUpdateProfile();
+            $_POST['name'] = 'Budi';
+            $this->userController->postUpdateProfile();
 
-        //     $this->expectOutputRegex("[Location: /]");
+            $this->expectOutputRegex("[Location: /]");
 
-        //     $result = $this->userRepository->findById("eko");
-        //     self::assertEquals("Budi", $result->name);
-        // }
+            $result = $this->userRepository->findById("eko");
+            // hasil yang diharapkan
+            self::assertEquals("Budi", $result->name);
+        }
 
-        // public function testPostUpdateProfileValidationError()
-        // {
-        //     $user = new User();
-        //     $user->id = "eko";
-        //     $user->name = "Eko";
-        //     $user->password = password_hash("rahasia", PASSWORD_BCRYPT);
-        //     $this->userRepository->save($user);
+        public function testPostUpdateProfileValidationError()
+        {
+            $user = new User();
+            $user->id = "eko";
+            $user->name = "Eldi";
+            $user->password = password_hash("rahasia", PASSWORD_BCRYPT);
+            $this->userRepository->save($user);
 
-        //     $session = new Session();
-        //     $session->id = uniqid();
-        //     $session->userId = $user->id;
-        //     $this->sessionRepository->save($session);
+            $session = new Session();
+            $session->id = uniqid();
+            $session->userId = $user->id;
+            $this->sessionRepository->save($session);
 
-        //     $_COOKIE[SessionService::$COOKIE_NAME] = $session->id;
+            $_COOKIE[SessionService::$COOKIE_NAME] = $session->id;
 
-        //     $_POST['name'] = '';
-        //     $this->userController->postUpdateProfile();
+            $_POST['name'] = '';
+            $this->userController->postUpdateProfile();
 
-        //     $this->expectOutputRegex("[Profile]");
-        //     $this->expectOutputRegex("[Id]");
-        //     $this->expectOutputRegex("[eko]");
-        //     $this->expectOutputRegex("[Name]");
-        //     $this->expectOutputRegex("[Id, Name can not blank]");
-        // }
+            // outputnya
+            $this->expectOutputRegex("[Profile]");
+            $this->expectOutputRegex("[Id]");
+            $this->expectOutputRegex("[eko]");
+            $this->expectOutputRegex("[Name]");
+            $this->expectOutputRegex("[Id, Name can not blank]");
+        }
 
         // public function testUpdatePassword()
         // {
