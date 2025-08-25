@@ -6,7 +6,7 @@ use Nabil\MVC\app\View;
 use Nabil\MVC\config\Database;
 use Nabil\MVC\Exception\ValidationException;
 use Nabil\MVC\Model\UserLoginRequest;
-use ProgrammerZamanNow\Belajar\PHP\MVC\Model\UserPasswordUpdateRequest;
+use Nabil\MVC\Model\UserPasswordUpdateRequest;
 use Nabil\MVC\Model\UserProfileUpdateRequest;
 use Nabil\MVC\Model\UserRegisterRequest;
 use Nabil\MVC\Repository\SessionRepository;
@@ -128,36 +128,36 @@ class UserController
         }
     }
 
-    // public function updatePassword()
-    // {
-    //     $user = $this->sessionService->current();
-    //     View::render('User/password', [
-    //         "title" => "Update user password",
-    //         "user" => [
-    //             "id" => $user->id
-    //         ]
-    //     ]);
-    // }
+    public function updatePassword()
+    {
+        $user = $this->sessionService->current();
+        View::render('User/password', [
+            "title" => "Update user password",
+            "user" => [
+                "id" => $user->id
+            ]
+        ]);
+    }
 
-    // public function postUpdatePassword()
-    // {
-    //     $user = $this->sessionService->current();
-    //     $request = new UserPasswordUpdateRequest();
-    //     $request->id = $user->id;
-    //     $request->oldPassword = $_POST['oldPassword'];
-    //     $request->newPassword = $_POST['newPassword'];
+    public function postUpdatePassword()
+    {
+        $user = $this->sessionService->current();
+        $request = new UserPasswordUpdateRequest();
+        $request->id = $user->id;
+        $request->oldPassword = $_POST['oldPassword'];
+        $request->newPassword = $_POST['newPassword'];
 
-    //     try {
-    //         $this->userService->updatePassword($request);
-    //         View::redirect('/');
-    //     } catch (ValidationException $exception) {
-    //         View::render('User/password', [
-    //             "title" => "Update user password",
-    //             "error" => $exception->getMessage(),
-    //             "user" => [
-    //                 "id" => $user->id
-    //             ]
-    //         ]);
-    //     }
-    // }
+        try {
+            $this->userService->updatePassword($request);
+            View::redirect('/');
+        } catch (ValidationException $exception) {
+            View::render('User/password', [
+                "title" => "Update user password",
+                "error" => $exception->getMessage(),
+                "user" => [
+                    "id" => $user->id
+                ]
+            ]);
+        }
+    }
 }
