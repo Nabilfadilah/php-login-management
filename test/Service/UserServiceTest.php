@@ -13,25 +13,23 @@ use Nabil\MVC\Domain\User;
 use PHPUnit\Framework\TestCase;
 use Nabil\MVC\Model\UserLoginRequest;
 use ProgrammerZamanNow\Belajar\PHP\MVC\Model\UserPasswordUpdateRequest;
-use ProgrammerZamanNow\Belajar\PHP\MVC\Model\UserProfileUpdateRequest;
-// use ProgrammerZamanNow\Belajar\PHP\MVC\Model\UserRegisterRequest;
-use ProgrammerZamanNow\Belajar\PHP\MVC\Repository\SessionRepository;
-// use ProgrammerZamanNow\Belajar\PHP\MVC\Repository\UserRepository;
+use Nabil\MVC\Model\UserProfileUpdateRequest;
+use Nabil\MVC\Repository\SessionRepository;
 
 class UserServiceTest extends TestCase
 {
     private UserService $userService;
     private UserRepository $userRepository;
-    // private SessionRepository $sessionRepository;
+    private SessionRepository $sessionRepository;
 
     protected function setUp(): void
     {
         $connection = Database::getConnection();
         $this->userRepository = new UserRepository($connection);
         $this->userService = new UserService($this->userRepository);
-        // $this->sessionRepository = new SessionRepository($connection);
+        $this->sessionRepository = new SessionRepository($connection);
 
-        // $this->sessionRepository->deleteAll();
+        $this->sessionRepository->deleteAll();
         $this->userRepository->deleteAll();
     }
 
@@ -129,46 +127,46 @@ class UserServiceTest extends TestCase
         self::assertTrue(password_verify($request->password, $response->user->password));
     }
 
-    // public function testUpdateSuccess()
-    // {
-    //     $user = new User();
-    //     $user->id = "eko";
-    //     $user->name = "Eko";
-    //     $user->password = password_hash("eko", PASSWORD_BCRYPT);
-    //     $this->userRepository->save($user);
+    public function testUpdateSuccess()
+    {
+        $user = new User();
+        $user->id = "eko";
+        $user->name = "Eko";
+        $user->password = password_hash("eko", PASSWORD_BCRYPT);
+        $this->userRepository->save($user);
 
-    //     $request = new UserProfileUpdateRequest();
-    //     $request->id = "eko";
-    //     $request->name = "Budi";
+        $request = new UserProfileUpdateRequest();
+        $request->id = "eko";
+        $request->name = "jonson";
 
-    //     $this->userService->updateProfile($request);
+        $this->userService->updateProfile($request);
 
-    //     $result = $this->userRepository->findById($user->id);
+        $result = $this->userRepository->findById($user->id);
 
-    //     self::assertEquals($request->name, $result->name);
-    // }
+        self::assertEquals($request->name, $result->name);
+    }
 
-    // public function testUpdateValidationError()
-    // {
-    //     $this->expectException(ValidationException::class);
+    public function testUpdateValidationError()
+    {
+        $this->expectException(ValidationException::class);
 
-    //     $request = new UserProfileUpdateRequest();
-    //     $request->id = "";
-    //     $request->name = "";
+        $request = new UserProfileUpdateRequest();
+        $request->id = "";
+        $request->name = "";
 
-    //     $this->userService->updateProfile($request);
-    // }
+        $this->userService->updateProfile($request);
+    }
 
-    // public function testUpdateNotFound()
-    // {
-    //     $this->expectException(ValidationException::class);
+    public function testUpdateNotFound()
+    {
+        $this->expectException(ValidationException::class);
 
-    //     $request = new UserProfileUpdateRequest();
-    //     $request->id = "eko";
-    //     $request->name = "Budi";
+        $request = new UserProfileUpdateRequest();
+        $request->id = "eko";
+        $request->name = "Jajang";
 
-    //     $this->userService->updateProfile($request);
-    // }
+        $this->userService->updateProfile($request);
+    }
 
     // public function testUpdatePasswordSuccess()
     // {
