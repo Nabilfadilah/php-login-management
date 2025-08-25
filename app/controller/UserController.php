@@ -7,7 +7,7 @@ use Nabil\MVC\config\Database;
 use Nabil\MVC\Exception\ValidationException;
 use Nabil\MVC\Model\UserLoginRequest;
 use ProgrammerZamanNow\Belajar\PHP\MVC\Model\UserPasswordUpdateRequest;
-use ProgrammerZamanNow\Belajar\PHP\MVC\Model\UserProfileUpdateRequest;
+use Nabil\MVC\Model\UserProfileUpdateRequest;
 use Nabil\MVC\Model\UserRegisterRequest;
 use Nabil\MVC\Repository\SessionRepository;
 use Nabil\MVC\Repository\UserRepository;
@@ -92,41 +92,41 @@ class UserController
         View::redirect("/");
     }
 
-    // public function updateProfile()
-    // {
-    //     $user = $this->sessionService->current();
+    public function updateProfile()
+    {
+        $user = $this->sessionService->current();
 
-    //     View::render('User/profile', [
-    //         "title" => "Update user profile",
-    //         "user" => [
-    //             "id" => $user->id,
-    //             "name" => $user->name
-    //         ]
-    //     ]);
-    // }
+        View::render('User/profile', [
+            "title" => "Update user profile",
+            "user" => [
+                "id" => $user->id,
+                "name" => $user->name
+            ]
+        ]);
+    }
 
-    // public function postUpdateProfile()
-    // {
-    //     $user = $this->sessionService->current();
+    public function postUpdateProfile()
+    {
+        $user = $this->sessionService->current();
 
-    //     $request = new UserProfileUpdateRequest();
-    //     $request->id = $user->id;
-    //     $request->name = $_POST['name'];
+        $request = new UserProfileUpdateRequest();
+        $request->id = $user->id;
+        $request->name = $_POST['name'];
 
-    //     try {
-    //         $this->userService->updateProfile($request);
-    //         View::redirect('/');
-    //     } catch (ValidationException $exception) {
-    //         View::render('User/profile', [
-    //             "title" => "Update user profile",
-    //             "error" => $exception->getMessage(),
-    //             "user" => [
-    //                 "id" => $user->id,
-    //                 "name" => $_POST['name']
-    //             ]
-    //         ]);
-    //     }
-    // }
+        try {
+            $this->userService->updateProfile($request);
+            View::redirect('/');
+        } catch (ValidationException $exception) {
+            View::render('User/profile', [
+                "title" => "Update user profile",
+                "error" => $exception->getMessage(),
+                "user" => [
+                    "id" => $user->id,
+                    "name" => $_POST['name']
+                ]
+            ]);
+        }
+    }
 
     // public function updatePassword()
     // {
