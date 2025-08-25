@@ -23,8 +23,8 @@ namespace Nabil\MVC\controller {
         {
             $this->userController = new UserController();
 
-            // $this->sessionRepository = new SessionRepository(Database::getConnection());
-            // $this->sessionRepository->deleteAll();
+            $this->sessionRepository = new SessionRepository(Database::getConnection());
+            $this->sessionRepository->deleteAll();
 
             $this->userRepository = new UserRepository(Database::getConnection());
             $this->userRepository->deleteAll();
