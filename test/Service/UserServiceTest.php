@@ -11,10 +11,7 @@ use Nabil\MVC\Exception\ValidationException;
 use Nabil\MVC\Domain\User;
 
 use PHPUnit\Framework\TestCase;
-// use ProgrammerZamanNow\Belajar\PHP\MVC\Config\Database;
-// use ProgrammerZamanNow\Belajar\PHP\MVC\Domain\User;
-// use ProgrammerZamanNow\Belajar\PHP\MVC\Exception\ValidationException;
-use ProgrammerZamanNow\Belajar\PHP\MVC\Model\UserLoginRequest;
+use Nabil\MVC\Model\UserLoginRequest;
 use ProgrammerZamanNow\Belajar\PHP\MVC\Model\UserPasswordUpdateRequest;
 use ProgrammerZamanNow\Belajar\PHP\MVC\Model\UserProfileUpdateRequest;
 // use ProgrammerZamanNow\Belajar\PHP\MVC\Model\UserRegisterRequest;
@@ -86,51 +83,51 @@ class UserServiceTest extends TestCase
         $this->userService->register($request);
     }
 
-    // public function testLoginNotFound()
-    // {
-    //     $this->expectException(ValidationException::class);
+    public function testLoginNotFound()
+    {
+        $this->expectException(ValidationException::class);
 
-    //     $request = new UserLoginRequest();
-    //     $request->id = "eko";
-    //     $request->password = "eko";
+        $request = new UserLoginRequest();
+        $request->id = "eko";
+        $request->password = "eko";
 
-    //     $this->userService->login($request);
-    // }
+        $this->userService->login($request);
+    }
 
-    // public function testLoginWrongPassword()
-    // {
-    //     $user = new User();
-    //     $user->id = "eko";
-    //     $user->name = "Eko";
-    //     $user->password = password_hash("eko", PASSWORD_BCRYPT);
+    public function testLoginWrongPassword()
+    {
+        $user = new User();
+        $user->id = "eko";
+        $user->name = "Eko";
+        $user->password = password_hash("eko", PASSWORD_BCRYPT);
 
-    //     $this->expectException(ValidationException::class);
+        $this->expectException(ValidationException::class);
 
-    //     $request = new UserLoginRequest();
-    //     $request->id = "eko";
-    //     $request->password = "salah";
+        $request = new UserLoginRequest();
+        $request->id = "eko";
+        $request->password = "salah";
 
-    //     $this->userService->login($request);
-    // }
+        $this->userService->login($request);
+    }
 
-    // public function testLoginSuccess()
-    // {
-    //     $user = new User();
-    //     $user->id = "eko";
-    //     $user->name = "Eko";
-    //     $user->password = password_hash("eko", PASSWORD_BCRYPT);
+    public function testLoginSuccess()
+    {
+        $user = new User();
+        $user->id = "eko";
+        $user->name = "Eko";
+        $user->password = password_hash("eko", PASSWORD_BCRYPT);
 
-    //     $this->expectException(ValidationException::class);
+        $this->expectException(ValidationException::class);
 
-    //     $request = new UserLoginRequest();
-    //     $request->id = "eko";
-    //     $request->password = "eko";
+        $request = new UserLoginRequest();
+        $request->id = "eko";
+        $request->password = "eko";
 
-    //     $response = $this->userService->login($request);
+        $response = $this->userService->login($request);
 
-    //     self::assertEquals($request->id, $response->user->id);
-    //     self::assertTrue(password_verify($request->password, $response->user->password));
-    // }
+        self::assertEquals($request->id, $response->user->id);
+        self::assertTrue(password_verify($request->password, $response->user->password));
+    }
 
     // public function testUpdateSuccess()
     // {
