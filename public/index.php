@@ -13,7 +13,16 @@ require_once __DIR__ . '/../vendor/autoload.php';
 // require __DIR__ . '/../app/view' . $path . '.php';
 use Nabil\MVC\app\Router;
 use Nabil\MVC\controller\HomeController;
+use Nabil\MVC\Controller\UserController;
+use Nabil\MVC\config\Database;
 
+Database::getConnection('prod'); // bikin koneksi setelan prodaction
+
+// Home controller
 Router::add('GET', '/', HomeController::class, 'index', []);
+
+// User controller
+Router::add('GET', '/users/register', UserController::class, 'register', []);
+Router::add('POST', '/users/register', UserController::class, 'postRegister', []);
 
 Router::run(); // jalankan routernya
