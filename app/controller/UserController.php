@@ -84,11 +84,13 @@ class UserController
         }
     }
 
-    // public function logout()
-    // {
-    //     $this->sessionService->destroy();
-    //     View::redirect("/");
-    // }
+    // logout
+    public function logout()
+    {
+        // hancurkan session nya
+        $this->sessionService->destroy();
+        View::redirect("/");
+    }
 
     // public function updateProfile()
     // {
