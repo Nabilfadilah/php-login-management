@@ -166,26 +166,26 @@ namespace Nabil\MVC\controller {
             $this->expectOutputRegex("[Id or password is wrong]");
         }
 
-        // public function testLogout()
-        // {
-        //     $user = new User();
-        //     $user->id = "eko";
-        //     $user->name = "Eko";
-        //     $user->password = password_hash("rahasia", PASSWORD_BCRYPT);
-        //     $this->userRepository->save($user);
+        public function testLogout()
+        {
+            $user = new User();
+            $user->id = "nabil";
+            $user->name = "Nabil";
+            $user->password = password_hash("rahasia", PASSWORD_BCRYPT);
+            $this->userRepository->save($user);
 
-        //     $session = new Session();
-        //     $session->id = uniqid();
-        //     $session->userId = $user->id;
-        //     $this->sessionRepository->save($session);
+            $session = new Session();
+            $session->id = uniqid();
+            $session->userId = $user->id;
+            $this->sessionRepository->save($session);
 
-        //     $_COOKIE[SessionService::$COOKIE_NAME] = $session->id;
+            $_COOKIE[SessionService::$COOKIE_NAME] = $session->id;
 
-        //     $this->userController->logout();
+            $this->userController->logout();
 
-        //     $this->expectOutputRegex("[Location: /]");
-        //     $this->expectOutputRegex("[X-PZN-SESSION: ]");
-        // }
+            $this->expectOutputRegex("[Location: /]");
+            $this->expectOutputRegex("[X-PZN-SESSION: ]");
+        }
 
         // public function testUpdateProfile()
         // {
