@@ -48,23 +48,24 @@ class UserRepositoryTest extends TestCase
     }
 
     // test update user
-    // public function testUpdate()
-    // {
-    //     $user = new User();
-    //     $user->id = "nabil";
-    //     $user->name = "fadilah";
-    //     $user->password = "rahasia";
+    public function testUpdate()
+    {
+        $user = new User();
+        $user->id = "nabil";
+        $user->name = "fadilah";
+        $user->password = "rahasia";
 
-    //     $this->userRepository->save($user);
+        $this->userRepository->save($user);
 
-    //     $user->name = "Budi";
-    //     $this->userRepository->update($user);
+        $user->name = "Budi";
+        $this->userRepository->update($user);
 
-    //     // lakukan query ke database
-    //     $result = $this->userRepository->findById($user->id);
+        // lakukan query ke database
+        $result = $this->userRepository->findById($user->id);
 
-    //     self::assertEquals($user->id, $result->id);
-    //     self::assertEquals($user->name, $result->name);
-    //     self::assertEquals($user->password, $result->password);
-    // }
+        // hasil yang diharapkan
+        self::assertEquals($user->id, $result->id);
+        self::assertEquals($user->name, $result->name);
+        self::assertEquals($user->password, $result->password);
+    }
 }
