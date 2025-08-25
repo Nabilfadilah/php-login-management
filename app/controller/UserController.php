@@ -2,24 +2,17 @@
 
 namespace Nabil\MVC\Controller;
 
-
 use Nabil\MVC\app\View;
-// use ProgrammerZamanNow\Belajar\PHP\MVC\App\View;
 use Nabil\MVC\config\Database;
-// use ProgrammerZamanNow\Belajar\PHP\MVC\Config\Database;
 use Nabil\MVC\Exception\ValidationException;
-// use ProgrammerZamanNow\Belajar\PHP\MVC\Exception\ValidationException;
-use ProgrammerZamanNow\Belajar\PHP\MVC\Model\UserLoginRequest;
+use Nabil\MVC\Model\UserLoginRequest;
 use ProgrammerZamanNow\Belajar\PHP\MVC\Model\UserPasswordUpdateRequest;
 use ProgrammerZamanNow\Belajar\PHP\MVC\Model\UserProfileUpdateRequest;
 use Nabil\MVC\Model\UserRegisterRequest;
-// use ProgrammerZamanNow\Belajar\PHP\MVC\Model\UserRegisterRequest;
-use ProgrammerZamanNow\Belajar\PHP\MVC\Repository\SessionRepository;
+use Nabil\MVC\Repository\SessionRepository;
 use Nabil\MVC\Repository\UserRepository;
-// use ProgrammerZamanNow\Belajar\PHP\MVC\Repository\UserRepository;
-use ProgrammerZamanNow\Belajar\PHP\MVC\Service\SessionService;
+use Nabil\MVC\Service\SessionService;
 use Nabil\MVC\Service\UserService;
-// use ProgrammerZamanNow\Belajar\PHP\MVC\Service\UserService;
 
 class UserController
 {
@@ -63,30 +56,30 @@ class UserController
         }
     }
 
-    // public function login()
-    // {
-    //     View::render('User/login', [
-    //         "title" => "Login user"
-    //     ]);
-    // }
+    public function login()
+    {
+        View::render('User/login', [
+            "title" => "Login user"
+        ]);
+    }
 
-    // public function postLogin()
-    // {
-    //     $request = new UserLoginRequest();
-    //     $request->id = $_POST['id'];
-    //     $request->password = $_POST['password'];
+    public function postLogin()
+    {
+        $request = new UserLoginRequest();
+        $request->id = $_POST['id'];
+        $request->password = $_POST['password'];
 
-    //     try {
-    //         $response = $this->userService->login($request);
-    //         $this->sessionService->create($response->user->id);
-    //         View::redirect('/');
-    //     } catch (ValidationException $exception) {
-    //         View::render('User/login', [
-    //             'title' => 'Login user',
-    //             'error' => $exception->getMessage()
-    //         ]);
-    //     }
-    // }
+        try {
+            $response = $this->userService->login($request);
+            // $this->sessionService->create($response->user->id);
+            View::redirect('/');
+        } catch (ValidationException $exception) {
+            View::render('User/login', [
+                'title' => 'Login user',
+                'error' => $exception->getMessage()
+            ]);
+        }
+    }
 
     // public function logout()
     // {
