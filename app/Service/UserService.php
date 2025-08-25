@@ -15,9 +15,6 @@ use Nabil\MVC\Model\UserPasswordUpdateRequest;
 use Nabil\MVC\Model\UserPasswordUpdateResponse;
 use Nabil\MVC\Model\UserProfileUpdateRequest;
 use Nabil\MVC\Model\UserProfileUpdateResponse;
-// use ProgrammerZamanNow\Belajar\PHP\MVC\Model\UserRegisterRequest;
-// use ProgrammerZamanNow\Belajar\PHP\MVC\Model\UserRegisterResponse;
-// use ProgrammerZamanNow\Belajar\PHP\MVC\Repository\UserRepository;
 
 class UserService
 {
@@ -140,43 +137,43 @@ class UserService
         }
     }
 
-    // public function updatePassword(UserPasswordUpdateRequest $request): UserPasswordUpdateResponse
-    // {
-    //     $this->validateUserPasswordUpdateRequest($request);
+    public function updatePassword(UserPasswordUpdateRequest $request): UserPasswordUpdateResponse
+    {
+        $this->validateUserPasswordUpdateRequest($request);
 
-    //     try {
-    //         Database::beginTransaction();
+        try {
+            Database::beginTransaction();
 
-    //         $user = $this->userRepository->findById($request->id);
-    //         if ($user == null) {
-    //             throw new ValidationException("User is not found");
-    //         }
+            $user = $this->userRepository->findById($request->id);
+            if ($user == null) {
+                throw new ValidationException("User is not found");
+            }
 
-    //         if (!password_verify($request->oldPassword, $user->password)) {
-    //             throw new ValidationException("Old password is wrong");
-    //         }
+            if (!password_verify($request->oldPassword, $user->password)) {
+                throw new ValidationException("Old password is wrong");
+            }
 
-    //         $user->password = password_hash($request->newPassword, PASSWORD_BCRYPT);
-    //         $this->userRepository->update($user);
+            $user->password = password_hash($request->newPassword, PASSWORD_BCRYPT);
+            $this->userRepository->update($user);
 
-    //         Database::commitTransaction();
+            Database::commitTransaction();
 
-    //         $response = new UserPasswordUpdateResponse();
-    //         $response->user = $user;
-    //         return $response;
-    //     } catch (\Exception $exception) {
-    //         Database::rollbackTransaction();
-    //         throw $exception;
-    //     }
-    // }
+            $response = new UserPasswordUpdateResponse();
+            $response->user = $user;
+            return $response;
+        } catch (\Exception $exception) {
+            Database::rollbackTransaction();
+            throw $exception;
+        }
+    }
 
-    // private function validateUserPasswordUpdateRequest(UserPasswordUpdateRequest $request)
-    // {
-    //     if (
-    //         $request->id == null || $request->oldPassword == null || $request->newPassword == null ||
-    //         trim($request->id) == "" || trim($request->oldPassword) == "" || trim($request->newPassword) == ""
-    //     ) {
-    //         throw new ValidationException("Id, Old Password, New Password can not blank");
-    //     }
-    // }
+    private function validateUserPasswordUpdateRequest(UserPasswordUpdateRequest $request)
+    {
+        if (
+            $request->id == null || $request->oldPassword == null || $request->newPassword == null ||
+            trim($request->id) == "" || trim($request->oldPassword) == "" || trim($request->newPassword) == ""
+        ) {
+            throw new ValidationException("Id, Old Password, New Password can not blank");
+        }
+    }
 }
