@@ -26,8 +26,9 @@ class UserController
         $userRepository = new UserRepository($connection);
         $this->userService = new UserService($userRepository);
 
-        // $sessionRepository = new SessionRepository($connection);
-        // $this->sessionService = new SessionService($sessionRepository, $userRepository);
+        // penggunaan session
+        $sessionRepository = new SessionRepository($connection);
+        $this->sessionService = new SessionService($sessionRepository, $userRepository);
     }
 
     public function register()
@@ -71,7 +72,9 @@ class UserController
 
         try {
             $response = $this->userService->login($request);
-            // $this->sessionService->create($response->user->id);
+
+            // ambil user id nya dari response
+            $this->sessionService->create($response->user->id);
             View::redirect('/');
         } catch (ValidationException $exception) {
             View::render('User/login', [
