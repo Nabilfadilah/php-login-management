@@ -93,78 +93,78 @@ namespace Nabil\MVC\controller {
             $this->expectOutputRegex("[User Id already exists]");
         }
 
-        // public function testLogin()
-        // {
-        //     $this->userController->login();
+        public function testLogin()
+        {
+            $this->userController->login();
 
-        //     $this->expectOutputRegex("[Login user]");
-        //     $this->expectOutputRegex("[Id]");
-        //     $this->expectOutputRegex("[Password]");
-        // }
+            $this->expectOutputRegex("[Login user]");
+            $this->expectOutputRegex("[Id]");
+            $this->expectOutputRegex("[Password]");
+        }
 
-        // public function testLoginSuccess()
-        // {
-        //     $user = new User();
-        //     $user->id = "eko";
-        //     $user->name = "Eko";
-        //     $user->password = password_hash("rahasia", PASSWORD_BCRYPT);
+        public function testLoginSuccess()
+        {
+            $user = new User();
+            $user->id = "eko";
+            $user->name = "Eko";
+            $user->password = password_hash("rahasia", PASSWORD_BCRYPT);
 
-        //     $this->userRepository->save($user);
+            $this->userRepository->save($user);
 
-        //     $_POST['id'] = 'eko';
-        //     $_POST['password'] = 'rahasia';
+            $_POST['id'] = 'eko';
+            $_POST['password'] = 'rahasia';
 
-        //     $this->userController->postLogin();
+            $this->userController->postLogin();
 
-        //     $this->expectOutputRegex("[Location: /]");
-        //     $this->expectOutputRegex("[X-PZN-SESSION: ]");
-        // }
+            $this->expectOutputRegex("[Location: /]");
+            $this->expectOutputRegex("[X-PZN-SESSION: ]");
+        }
 
-        // public function testLoginValidationError()
-        // {
-        //     $_POST['id'] = '';
-        //     $_POST['password'] = '';
+        public function testLoginValidationError()
+        {
+            $_POST['id'] = '';
+            $_POST['password'] = '';
 
-        //     $this->userController->postLogin();
+            $this->userController->postLogin();
 
-        //     $this->expectOutputRegex("[Login user]");
-        //     $this->expectOutputRegex("[Id]");
-        //     $this->expectOutputRegex("[Password]");
-        //     $this->expectOutputRegex("[Id, Password can not blank]");
-        // }
+            $this->expectOutputRegex("[Login user]");
+            $this->expectOutputRegex("[Id]");
+            $this->expectOutputRegex("[Password]");
+            $this->expectOutputRegex("[Id, Password can not blank]");
+        }
 
-        // public function testLoginUserNotFound()
-        // {
-        //     $_POST['id'] = 'notfound';
-        //     $_POST['password'] = 'notfound';
+        public function testLoginUserNotFound()
+        {
+            $_POST['id'] = 'notfound';
+            $_POST['password'] = 'notfound';
 
-        //     $this->userController->postLogin();
+            $this->userController->postLogin();
 
-        //     $this->expectOutputRegex("[Login user]");
-        //     $this->expectOutputRegex("[Id]");
-        //     $this->expectOutputRegex("[Password]");
-        //     $this->expectOutputRegex("[Id or password is wrong]");
-        // }
+            $this->expectOutputRegex("[Login user]");
+            $this->expectOutputRegex("[Id]");
+            $this->expectOutputRegex("[Password]");
+            $this->expectOutputRegex("[Id or password is wrong]");
+        }
 
-        // public function testLoginWrongPassword()
-        // {
-        //     $user = new User();
-        //     $user->id = "eko";
-        //     $user->name = "Eko";
-        //     $user->password = password_hash("rahasia", PASSWORD_BCRYPT);
+        public function testLoginWrongPassword()
+        {
+            $user = new User();
+            $user->id = "eko";
+            $user->name = "Eko";
+            $user->password = password_hash("rahasia", PASSWORD_BCRYPT);
 
-        //     $this->userRepository->save($user);
+            $this->userRepository->save($user);
 
-        //     $_POST['id'] = 'eko';
-        //     $_POST['password'] = 'salah';
+            $_POST['id'] = 'eko';
+            $_POST['password'] = 'salah';
 
-        //     $this->userController->postLogin();
+            $this->userController->postLogin();
 
-        //     $this->expectOutputRegex("[Login user]");
-        //     $this->expectOutputRegex("[Id]");
-        //     $this->expectOutputRegex("[Password]");
-        //     $this->expectOutputRegex("[Id or password is wrong]");
-        // }
+            $this->expectOutputRegex("[Login user]");
+            $this->expectOutputRegex("[Id]");
+            $this->expectOutputRegex("[Password]");
+            $this->expectOutputRegex("[Id or password is wrong]");
+        }
 
         // public function testLogout()
         // {
